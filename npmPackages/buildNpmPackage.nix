@@ -12,6 +12,7 @@
 , checkPhase ? "npm test"
 , doCheck ? true
 , jailbreak ? false # Ignore version constraints of the dependencies
+, meta ? {}
 }:
 
 let
@@ -23,7 +24,7 @@ let
 in
 stdenv.mkDerivation {
   inherit
-    buildInputs buildPhase checkPhase doCheck name patches src
+    buildInputs buildPhase checkPhase doCheck meta name patches src
     ;
 
   outputs = [ "out" "pack" ];
