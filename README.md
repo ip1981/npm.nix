@@ -33,6 +33,35 @@ them and resolve depenednecies offline. Or simply a bundle with `node_modules`
 without symbolic links, deduplicated, etc.
 
 
+Structure
+=========
+
+Entry point in the [npmPackages](./npmPackages) directory. It can be used
+in command line as `nix build -f ./npmPackages PACKAGE` or `nix-build ./npmPackages -A PACKAGE`.
+It can be used in top-level Nix expressions like this:
+
+```nix
+{
+#...
+  node12Packages = import ./npmPackages { nodejs = nodejs-12_x; };
+#...
+}
+```
+
+Each NPM package is placed in separate directory with at least one file -
+`default.nix`.  Scoped packages are placed into corresponding subdirectories.
+
+For the purpose of Nix expressions, names of the packages are modified:
+
+  * all slashes are replaced by dashes (`/` -> `-`);
+  * all dots are replaced by dashes (`.` -> `-`);
+  * the at symbol (`@`) is removed.
+
+For example, some imaginary package `@babel/core` would be located under
+`./npmPackages/@babel/core/default.nix` and available in Nix expressions as
+`babel-core`.
+
+
 How it works
 ============
 
