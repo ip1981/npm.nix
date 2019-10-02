@@ -20,11 +20,13 @@ Guideline](https://www.debian.org/doc/debian-policy/).  We build every
 JavaScript package from its source code, we can apply any patches, we can
 control what is installed.
 
+To help adding and updaing packages there is the
+[npm4nix](https://github.com/ip1981/npm4nix) utility.
+
 
 To be (maybe) done
 ==================
 
-* A tool similar to [cabal2nix](https://github.com/NixOS/cabal2nix).
 * Something like `nodeWithPackages`.
 * Bundles. For example, a closed set of tarballs, so that NPM can install
 them and resolve depenednecies offline. Or simply a bundle with `node_modules`
