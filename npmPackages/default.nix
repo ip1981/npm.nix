@@ -84,6 +84,7 @@ let
       async-foreach = callPackage ./async-foreach {};
       chartjs-color-string = callPackage ./chartjs-color-string { };
       color-name = callPackage ./color-name {};
+      npm4nix = callPackage ./npm4nix {};
       posix-getopt = callPackage ./posix-getopt {};
     }
   );
