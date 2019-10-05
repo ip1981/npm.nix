@@ -8,7 +8,7 @@
 , nativeBuildInputs ? []
 , patches ? []
 , files ? [] # override "files" in package.json
-, buildPhase ? "npm --if-present run build"
+, buildPhase ? "npm --nodedir=${nodejs} install"
 , checkPhase ? "npm test"
 , doCheck ? true
 , jailbreak ? false # Ignore version constraints of the dependencies
