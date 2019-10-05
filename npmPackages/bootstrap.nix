@@ -29,6 +29,7 @@ self: super:
     _dummy_chalk = _mkDummy "chalk" "2.4.2";
     _dummy_covert = _mkDummy "covert" "1.1.1";
     _dummy_execa = _mkDummy "execa" "2.0.5";
+    _dummy_mocha = _mkDummy "mocha" "6.2.1";
     _dummy_mock-fs = _mkDummy "mock-fs" "4.10.1";
     _dummy_svg-term-cli = _mkDummy "svg-term-cli" "2.1.1";
     _dummy_tap = _mkDummy "tap" "14.6.5";
@@ -64,6 +65,10 @@ in rec {
     ava = _dummy_ava;
     xo = _dummy_xo;
     tsd = _dummy_tsd;
+  });
+
+  _file-uri-to-path = dontCheck(callPackage ./file-uri-to-path {
+    mocha = _dummy_mocha;
   });
 
   _fs-realpath = dontCheck(callPackage ./fs.realpath {

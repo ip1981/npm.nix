@@ -11,6 +11,7 @@ in {
   color-name = callPackage ./color-name {};
   escape-string-regexp = callPackage ./escape-string-regexp {};
   fibers = callPackage ./fibers {};
+  file-uri-to-path = callPackage ./file-uri-to-path {};
   has-flag = callPackage ./has-flag {};
   minimist = callPackage ./minimist {};
   mkdirp = callPackage ./mkdirp {};
