@@ -54,6 +54,7 @@ stdenv.mkDerivation {
       ${toString npmInputs} < package.json > package.json.resolved
     mv package.json.resolved package.json
 
+    rm -f package-lock.json
     npm --nodedir=${nodejs} --ignore-scripts install
 
   '';
