@@ -50,6 +50,10 @@ in rec {
     xo = _dummy_xo;
   });
 
+  _bindings = dontCheck (callPackage ./bindings {
+    file-uri-to-path = _file-uri-to-path;
+  });
+
   _callsites = dontCheck (callPackage ./callsites {
     ava = _dummy_ava;
     xo = _dummy_xo;
