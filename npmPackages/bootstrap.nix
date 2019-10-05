@@ -48,6 +48,12 @@ in rec {
     xo = _dummy_xo;
   });
 
+  _callsites = dontCheck (callPackage ./callsites {
+    ava = _dummy_ava;
+    xo = _dummy_xo;
+    tsd = _dummy_tsd;
+  });
+
   _color-convert = dontCheck (callPackage ./color-convert {
     chalk = _dummy_chalk;
     xo = _dummy_xo;

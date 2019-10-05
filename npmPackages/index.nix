@@ -5,6 +5,7 @@ let
 in {
   ansi-styles = callPackage ./ansi-styles {};
   async-foreach = callPackage ./async-foreach {};
+  callsites = callPackage ./callsites {};
   chartjs-color-string = callPackage ./chartjs-color-string {};
   color-convert = callPackage ./color-convert {};
   color-name = callPackage ./color-name {};
