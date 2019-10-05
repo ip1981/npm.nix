@@ -3,6 +3,7 @@ self: super:
 let
   inherit (super) callPackage;
 in {
+  ansi-styles = callPackage ./ansi-styles {};
   async-foreach = callPackage ./async-foreach {};
   chartjs-color-string = callPackage ./chartjs-color-string {};
   color-convert = callPackage ./color-convert {};

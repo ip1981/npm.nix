@@ -25,9 +25,11 @@ in rec {
   # XXX dummy package are to help bootstrapping.
   # XXX Usually these are devDependencies needed to run tests.
 
+  _dummy_ava = _mkDummy "ava" "2.4.0";
   _dummy_chalk = _mkDummy "chalk" "2.4.2";
   _dummy_covert = _mkDummy "covert" "1.1.1";
   _dummy_mock-fs = _mkDummy "mock-fs" "4.10.1";
+  _dummy_svg-term-cli = _mkDummy "svg-term-cli" "2.1.1";
   _dummy_tap = _mkDummy "tap" "14.6.5";
   _dummy_tape = _mkDummy "tape" "4.11.0";
   _dummy_xo = _mkDummy "xo" "0.25.3";
@@ -35,6 +37,13 @@ in rec {
 
   # XXX packages with underscore are "incomplete".
   # XXX Should only be used to resolve circular dependencies.
+
+  _ansi-styles = dontCheck (callPackage ./ansi-styles {
+    ava = _dummy_ava;
+    color-convert = _color-convert;
+    svg-term-cli = _dummy_svg-term-cli;
+    xo = _dummy_xo;
+  });
 
   _color-convert = dontCheck (callPackage ./color-convert {
     chalk = _dummy_chalk;
