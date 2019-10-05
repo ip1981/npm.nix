@@ -63,6 +63,12 @@ in rec {
     tap = _dummy_tap;
   });
 
+  _has-flag = dontCheck (callPackage ./has-flag {
+    ava = _dummy_ava;
+    xo = _dummy_xo;
+    tsd = _dummy_tsd;
+  });
+
   _minimist = dontCheck (callPackage ./minimist {
     covert = _dummy_covert;
     tap = _dummy_tap;
