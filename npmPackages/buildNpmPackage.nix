@@ -8,7 +8,7 @@
 , nativeBuildInputs ? []
 , patches ? []
 , files ? [] # override "files" in package.json
-, buildPhase ? "npm --nodedir=${nodejs} install"
+, buildPhase ? "npm install"
 , checkPhase ? "npm test"
 , doCheck ? true
 , jailbreak ? false # Ignore version constraints of the dependencies
@@ -39,6 +39,7 @@ stdenv.mkDerivation {
       heading = ${name}
       loglevel = verbose
       metrics-registry = http://localhost
+      nodedir = ${nodejs}
       offline = true
       optional = false
       package-lock = false
@@ -55,7 +56,7 @@ stdenv.mkDerivation {
     mv package.json.resolved package.json
 
     rm -f package-lock.json
-    npm --nodedir=${nodejs} --ignore-scripts install
+    npm --ignore-scripts install
 
   '';
 
