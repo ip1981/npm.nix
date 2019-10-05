@@ -7,6 +7,7 @@ in {
   chartjs-color-string = callPackage ./chartjs-color-string {};
   color-convert = callPackage ./color-convert {};
   color-name = callPackage ./color-name {};
+  fibers = callPackage ./fibers {};
   minimist = callPackage ./minimist {};
   mkdirp = callPackage ./mkdirp {};
   npm4nix = callPackage ./npm4nix {};
