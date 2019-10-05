@@ -8,6 +8,7 @@ in {
   chartjs-color-string = callPackage ./chartjs-color-string {};
   color-convert = callPackage ./color-convert {};
   color-name = callPackage ./color-name {};
+  escape-string-regexp = callPackage ./escape-string-regexp {};
   fibers = callPackage ./fibers {};
   minimist = callPackage ./minimist {};
   mkdirp = callPackage ./mkdirp {};

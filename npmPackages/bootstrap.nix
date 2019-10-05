@@ -32,6 +32,7 @@ self: super:
     _dummy_svg-term-cli = _mkDummy "svg-term-cli" "2.1.1";
     _dummy_tap = _mkDummy "tap" "14.6.5";
     _dummy_tape = _mkDummy "tape" "4.11.0";
+    _dummy_tsd = _mkDummy "tsd" "0.9.0";
     _dummy_xo = _mkDummy "xo" "0.25.3";
 
 in rec {
@@ -50,6 +51,12 @@ in rec {
   _color-convert = dontCheck (callPackage ./color-convert {
     chalk = _dummy_chalk;
     xo = _dummy_xo;
+  });
+
+  _escape-string-regexp = dontCheck (callPackage ./escape-string-regexp {
+    ava = _dummy_ava;
+    xo = _dummy_xo;
+    tsd = _dummy_tsd;
   });
 
   _fs-realpath = dontCheck(callPackage ./fs.realpath {
