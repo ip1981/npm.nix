@@ -6,4 +6,5 @@ rec {
   };
 
   dontCheck = drv: overrideBuild drv (drv: { doCheck = false; });
+  jailbreak = drv: overrideBuild drv (drv: { jailbreak = true; });
 }
