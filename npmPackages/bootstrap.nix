@@ -81,6 +81,12 @@ in rec {
     tap = _dummy_tap;
   });
 
+  _resolve-from = dontCheck (callPackage ./resolve-from {
+    ava = _dummy_ava;
+    xo = _dummy_xo;
+    tsd = _dummy_tsd;
+  });
+
   _semver = dontCheck (callPackage ./semver {
     tap = _dummy_tap;
   });

@@ -15,6 +15,7 @@ in {
   mkdirp = callPackage ./mkdirp {};
   npm4nix = callPackage ./npm4nix {};
   posix-getopt = callPackage ./posix-getopt {};
+  resolve-from = callPackage ./resolve-from {};
   semver = callPackage ./semver {};
   wrappy = callPackage ./wrappy {};
 }
