@@ -21,18 +21,20 @@ self: super:
 
     inherit (import ./lib.nix) dontCheck;
     inherit (super) callPackage;
-in rec {
-  # XXX dummy package are to help bootstrapping.
-  # XXX Usually these are devDependencies needed to run tests.
 
-  _dummy_ava = _mkDummy "ava" "2.4.0";
-  _dummy_chalk = _mkDummy "chalk" "2.4.2";
-  _dummy_covert = _mkDummy "covert" "1.1.1";
-  _dummy_mock-fs = _mkDummy "mock-fs" "4.10.1";
-  _dummy_svg-term-cli = _mkDummy "svg-term-cli" "2.1.1";
-  _dummy_tap = _mkDummy "tap" "14.6.5";
-  _dummy_tape = _mkDummy "tape" "4.11.0";
-  _dummy_xo = _mkDummy "xo" "0.25.3";
+    # XXX dummy package are to help bootstrapping.
+    # XXX Usually these are devDependencies needed to run tests.
+
+    _dummy_ava = _mkDummy "ava" "2.4.0";
+    _dummy_chalk = _mkDummy "chalk" "2.4.2";
+    _dummy_covert = _mkDummy "covert" "1.1.1";
+    _dummy_mock-fs = _mkDummy "mock-fs" "4.10.1";
+    _dummy_svg-term-cli = _mkDummy "svg-term-cli" "2.1.1";
+    _dummy_tap = _mkDummy "tap" "14.6.5";
+    _dummy_tape = _mkDummy "tape" "4.11.0";
+    _dummy_xo = _mkDummy "xo" "0.25.3";
+
+in rec {
 
 
   # XXX packages with underscore are "incomplete".
