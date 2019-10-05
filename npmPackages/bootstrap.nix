@@ -28,6 +28,7 @@ self: super:
     _dummy_ava = _mkDummy "ava" "2.4.0";
     _dummy_chalk = _mkDummy "chalk" "2.4.2";
     _dummy_covert = _mkDummy "covert" "1.1.1";
+    _dummy_execa = _mkDummy "execa" "2.0.5";
     _dummy_mock-fs = _mkDummy "mock-fs" "4.10.1";
     _dummy_svg-term-cli = _mkDummy "svg-term-cli" "2.1.1";
     _dummy_tap = _mkDummy "tap" "14.6.5";
@@ -85,6 +86,14 @@ in rec {
     minimist = _minimist;
     mock-fs = _dummy_mock-fs;
     tap = _dummy_tap;
+  });
+
+  _parent-module = dontCheck (callPackage ./parent-module {
+    ava = _dummy_ava;
+    callsites = _callsites;
+    execa = _dummy_execa;
+    tsd = _dummy_tsd;
+    xo = _dummy_xo;
   });
 
   _resolve-from = dontCheck (callPackage ./resolve-from {
