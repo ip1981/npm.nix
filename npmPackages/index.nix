@@ -18,6 +18,7 @@ in {
   file-uri-to-path = callPackage ./file-uri-to-path {};
   has-flag = callPackage ./has-flag {};
   inflight = callPackage ./inflight {};
+  minimatch = callPackage ./minimatch {};
   minimist = callPackage ./minimist {};
   mkdirp = callPackage ./mkdirp {};
   npm4nix = callPackage ./npm4nix {};
