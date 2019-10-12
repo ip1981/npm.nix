@@ -85,6 +85,12 @@ in rec {
     tsd = _dummy_tsd;
   });
 
+  _inflight = dontCheck (callPackage ./inflight {
+    once = _once;
+    tap = _dummy_tap;
+    wrappy = _wrappy;
+  });
+
   _minimist = dontCheck (callPackage ./minimist {
     covert = _dummy_covert;
     tap = _dummy_tap;
