@@ -5,6 +5,7 @@ let
 in {
   ansi-styles = callPackage ./ansi-styles {};
   async-foreach = callPackage ./async-foreach {};
+  balanced-match = callPackage ./balanced-match {};
   bindings = callPackage ./bindings {};
   callsites = callPackage ./callsites {};
   chartjs-color-string = callPackage ./chartjs-color-string {};

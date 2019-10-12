@@ -29,6 +29,7 @@ self: super:
     _dummy_chalk = _mkDummy "chalk" "2.4.2";
     _dummy_covert = _mkDummy "covert" "1.1.1";
     _dummy_execa = _mkDummy "execa" "2.0.5";
+    _dummy_matcha = _mkDummy "matcha" "0.7.0";
     _dummy_mocha = _mkDummy "mocha" "6.2.1";
     _dummy_mock-fs = _mkDummy "mock-fs" "4.10.1";
     _dummy_svg-term-cli = _mkDummy "svg-term-cli" "2.1.1";
@@ -52,6 +53,11 @@ in rec {
 
   _bindings = dontCheck (callPackage ./bindings {
     file-uri-to-path = _file-uri-to-path;
+  });
+
+  _balanced-match = dontCheck (callPackage ./balanced-match {
+    matcha = _dummy_matcha;
+    tape = _dummy_tape;
   });
 
   _callsites = dontCheck (callPackage ./callsites {
