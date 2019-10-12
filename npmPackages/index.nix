@@ -17,6 +17,7 @@ in {
   minimist = callPackage ./minimist {};
   mkdirp = callPackage ./mkdirp {};
   npm4nix = callPackage ./npm4nix {};
+  once = callPackage ./once {};
   parent-module = callPackage ./parent-module {};
   posix-getopt = callPackage ./posix-getopt {};
   resolve-from = callPackage ./resolve-from {};

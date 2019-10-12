@@ -97,6 +97,11 @@ in rec {
     tap = _dummy_tap;
   });
 
+  _once = dontCheck (callPackage ./once {
+    tap = _dummy_tap;
+    wrappy = _wrappy;
+  });
+
   _parent-module = dontCheck (callPackage ./parent-module {
     ava = _dummy_ava;
     callsites = _callsites;
