@@ -7,6 +7,7 @@ in {
   async-foreach = callPackage ./async-foreach {};
   balanced-match = callPackage ./balanced-match {};
   bindings = callPackage ./bindings {};
+  brace-expansion = callPackage ./brace-expansion {};
   callsites = callPackage ./callsites {};
   chartjs-color-string = callPackage ./chartjs-color-string {};
   color-convert = callPackage ./color-convert {};

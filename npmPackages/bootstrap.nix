@@ -60,6 +60,13 @@ in rec {
     tape = _dummy_tape;
   });
 
+  _brace-expansion = dontCheck (callPackage ./brace-expansion {
+    balanced-match = _balanced-match;
+    concat-map = _concat-map;
+    matcha = _dummy_matcha;
+    tape = _dummy_tape;
+  });
+
   _callsites = dontCheck (callPackage ./callsites {
     ava = _dummy_ava;
     xo = _dummy_xo;
