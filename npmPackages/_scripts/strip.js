@@ -5,14 +5,20 @@ const {
 } = require('./package.js');
 
 
-var stripDependencies = false;
+var phase;
 
 const args = process.argv.slice(2);
 
 for (var i = 0; i < args.length; i++) {
     switch (args[i]) {
-        case '--strip-dependencies':
-            stripDependencies = true;
+        case '--post-configure':
+            phase = 'postConfigure';
+            break;
+        case '--pre-install':
+            phase = 'preInstall';
+            break;
+        case '--post-install':
+            phase = 'postInstall';
             break;
         default:
             ;
@@ -20,17 +26,29 @@ for (var i = 0; i < args.length; i++) {
 }
 
 pipeThrough((pkg, done) => {
-    delete pkg.devDependencies;
-    delete pkg.engines;
-    delete pkg.keywords;
-    delete pkg.optionalDependencies;
-    delete pkg.peerDependencies;
-    delete pkg.scripts;
-    delete pkg.tap;
-    delete pkg.xo;
+    switch (phase) {
+        case 'postInstall':
+            delete pkg.dependencies;
+            // fall throw
 
-    if (stripDependencies) {
-        delete pkg.dependencies;
+        case 'preInstall':
+            delete pkg.engines;
+            delete pkg.keywords;
+            delete pkg.scripts;
+            delete pkg.tap;
+            delete pkg.xo;
+            // fall throw
+
+        case 'postConfigure':
+            delete pkg.devDependencies;
+            delete pkg.optionalDependencies;
+            delete pkg.peerDependencies;
+            if (pkg.scripts) {
+                delete pkg.scripts.prepublish;
+            }
+            break;
+        default:
+            throw (`Unknown phase: "${phase}"`);
     }
 
     done(pkg);

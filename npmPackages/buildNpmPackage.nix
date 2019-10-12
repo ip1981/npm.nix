@@ -58,11 +58,13 @@ stdenv.mkDerivation {
     rm -f package-lock.json
     npm --ignore-scripts install
 
+    node ${scripts}/strip.js --post-configure < package.json > package.json.stripped
+    mv package.json.stripped package.json
+
   '';
 
   installPhase = ''
-    # remove things that are not needed any more or not needed with Nix:
-    node ${scripts}/strip.js < package.json > package.json.stripped
+    node ${scripts}/strip.js --pre-install < package.json > package.json.stripped
     mv package.json.stripped package.json
 
     ${lib.optionalString (files != []) ''
@@ -90,7 +92,7 @@ stdenv.mkDerivation {
 
     # Finally, strip info about runtime dependencies,
     # so that NPM will not complain about missed or extraneous dependencies:
-    node ${scripts}/strip.js --strip-dependencies < package.json > package.json.stripped
+    node ${scripts}/strip.js --post-install < package.json > package.json.stripped
     mv package.json.stripped package.json
   '';
 }
