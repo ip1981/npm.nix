@@ -71,6 +71,10 @@ in rec {
     xo = _dummy_xo;
   });
 
+  _concat-map = dontCheck (callPackage ./concat-map {
+    tape = _dummy_tape;
+  });
+
   _escape-string-regexp = dontCheck (callPackage ./escape-string-regexp {
     ava = _dummy_ava;
     xo = _dummy_xo;

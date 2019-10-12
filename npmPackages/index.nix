@@ -11,6 +11,7 @@ in {
   chartjs-color-string = callPackage ./chartjs-color-string {};
   color-convert = callPackage ./color-convert {};
   color-name = callPackage ./color-name {};
+  concat-map = callPackage ./concat-map {};
   escape-string-regexp = callPackage ./escape-string-regexp {};
   fibers = callPackage ./fibers {};
   file-uri-to-path = callPackage ./file-uri-to-path {};
