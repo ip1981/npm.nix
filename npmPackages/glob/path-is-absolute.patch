@@ -1,0 +1,304 @@
+commit ac0ba5a3d8b3aa4580d4fc12df21bf0cae4e67fa
+Author: Igor Pashev <pashev.igor@gmail.com>
+Date:   Sat Oct 12 20:22:10 2019 +0200
+
+    Use path.isAbsolute
+    
+    The path-is-absolute package is no longer relevant as Node.js 0.12 is
+    unmaintained.
+
+diff --git a/common.js b/common.js
+index 66651bb..ebe0f9d 100644
+--- a/common.js
++++ b/common.js
+@@ -14,7 +14,6 @@ function ownProp (obj, field) {
+ 
+ var path = require("path")
+ var minimatch = require("minimatch")
+-var isAbsolute = require("path-is-absolute")
+ var Minimatch = minimatch.Minimatch
+ 
+ function alphasorti (a, b) {
+@@ -105,7 +104,7 @@ function setopts (self, pattern, options) {
+ 
+   // TODO: is an absolute `cwd` supposed to be resolved against `root`?
+   // e.g. { cwd: '/test', root: __dirname } === path.join(__dirname, '/test')
+-  self.cwdAbs = isAbsolute(self.cwd) ? self.cwd : makeAbs(self, self.cwd)
++  self.cwdAbs = path.isAbsolute(self.cwd) ? self.cwd : makeAbs(self, self.cwd)
+   if (process.platform === "win32")
+     self.cwdAbs = self.cwdAbs.replace(/\\/g, "/")
+   self.nomount = !!options.nomount
+@@ -204,7 +203,7 @@ function makeAbs (self, f) {
+   var abs = f
+   if (f.charAt(0) === '/') {
+     abs = path.join(self.root, f)
+-  } else if (isAbsolute(f) || f === '') {
++  } else if (path.isAbsolute(f) || f === '') {
+     abs = f
+   } else if (self.changedCwd) {
+     abs = path.resolve(self.cwd, f)
+diff --git a/glob.js b/glob.js
+index 58dec0f..1f2bd0b 100644
+--- a/glob.js
++++ b/glob.js
+@@ -48,7 +48,6 @@ var inherits = require('inherits')
+ var EE = require('events').EventEmitter
+ var path = require('path')
+ var assert = require('assert')
+-var isAbsolute = require('path-is-absolute')
+ var globSync = require('./sync.js')
+ var common = require('./common.js')
+ var alphasort = common.alphasort
+@@ -345,8 +344,8 @@ Glob.prototype._process = function (pattern, index, inGlobStar, cb) {
+   var read
+   if (prefix === null)
+     read = '.'
+-  else if (isAbsolute(prefix) || isAbsolute(pattern.join('/'))) {
+-    if (!prefix || !isAbsolute(prefix))
++  else if (path.isAbsolute(prefix) || path.isAbsolute(pattern.join('/'))) {
++    if (!prefix || !path.isAbsolute(prefix))
+       prefix = '/' + prefix
+     read = prefix
+   } else
+@@ -463,7 +462,7 @@ Glob.prototype._emitMatch = function (index, e) {
+     return
+   }
+ 
+-  var abs = isAbsolute(e) ? e : this._makeAbs(e)
++  var abs = path.isAbsolute(e) ? e : this._makeAbs(e)
+ 
+   if (this.mark)
+     e = this._mark(e)
+@@ -687,7 +686,7 @@ Glob.prototype._processSimple2 = function (prefix, index, er, exists, cb) {
+   if (!exists)
+     return cb()
+ 
+-  if (prefix && isAbsolute(prefix) && !this.nomount) {
++  if (prefix && path.isAbsolute(prefix) && !this.nomount) {
+     var trail = /[\/\\]$/.test(prefix)
+     if (prefix.charAt(0) === '/') {
+       prefix = path.join(this.root, prefix)
+diff --git a/package-lock.json b/package-lock.json
+index e44bdd1..ac68005 100644
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -334,8 +334,7 @@
+         "inflight": "^1.0.4",
+         "inherits": "2",
+         "minimatch": "^3.0.2",
+-        "once": "^1.3.0",
+-        "path-is-absolute": "^1.0.0"
++        "once": "^1.3.0"
+       }
+     },
+     "graceful-fs": {
+@@ -3224,11 +3223,6 @@
+         "own-or": "^1.0.0"
+       }
+     },
+-    "path-is-absolute": {
+-      "version": "1.0.1",
+-      "resolved": "https://registry.npmjs.org/path-is-absolute/-/path-is-absolute-1.0.1.tgz",
+-      "integrity": "sha1-F0uSaHNVNP+8es5r9TpanhtcX18="
+-    },
+     "performance-now": {
+       "version": "2.1.0",
+       "resolved": "https://registry.npmjs.org/performance-now/-/performance-now-2.1.0.tgz",
+diff --git a/package.json b/package.json
+index 51b0c29..4042c4b 100644
+--- a/package.json
++++ b/package.json
+@@ -21,8 +21,7 @@
+     "inflight": "^1.0.4",
+     "inherits": "2",
+     "minimatch": "^3.0.4",
+-    "once": "^1.3.0",
+-    "path-is-absolute": "^1.0.0"
++    "once": "^1.3.0"
+   },
+   "devDependencies": {
+     "mkdirp": "0",
+diff --git a/sync.js b/sync.js
+index c952134..bed6441 100644
+--- a/sync.js
++++ b/sync.js
+@@ -9,7 +9,6 @@ var Glob = require('./glob.js').Glob
+ var util = require('util')
+ var path = require('path')
+ var assert = require('assert')
+-var isAbsolute = require('path-is-absolute')
+ var common = require('./common.js')
+ var alphasort = common.alphasort
+ var alphasorti = common.alphasorti
+@@ -112,8 +111,8 @@ GlobSync.prototype._process = function (pattern, index, inGlobStar) {
+   var read
+   if (prefix === null)
+     read = '.'
+-  else if (isAbsolute(prefix) || isAbsolute(pattern.join('/'))) {
+-    if (!prefix || !isAbsolute(prefix))
++  else if (path.isAbsolute(prefix) || path.isAbsolute(pattern.join('/'))) {
++    if (!prefix || !path.isAbsolute(prefix))
+       prefix = '/' + prefix
+     read = prefix
+   } else
+@@ -396,7 +395,7 @@ GlobSync.prototype._processSimple = function (prefix, index) {
+   if (!exists)
+     return
+ 
+-  if (prefix && isAbsolute(prefix) && !this.nomount) {
++  if (prefix && path.isAbsolute(prefix) && !this.nomount) {
+     var trail = /[\/\\]$/.test(prefix)
+     if (prefix.charAt(0) === '/') {
+       prefix = path.join(this.root, prefix)
+diff --git a/test/absolute.js b/test/absolute.js
+index 704caa9..764e7db 100644
+--- a/test/absolute.js
++++ b/test/absolute.js
+@@ -2,16 +2,11 @@ require('./global-leakage.js')
+ var t = require('tap')
+ var glob = require('../')
+ var common = require('../common.js')
++var path = require('path')
+ var pattern = 'a/b/**';
+ var bashResults = require('./bash-results.json')
+-var isAbsolute = require('path-is-absolute')
+ process.chdir(__dirname + '/fixtures')
+ 
+-t.Test.prototype.addAssert('isAbsolute', 1, function (file, message, extra) {
+-  extra.found = file
+-  return this.ok(isAbsolute(file), message || 'must be absolute', extra)
+-})
+-
+ var marks = [ true, false ]
+ marks.forEach(function (mark) {
+   t.test('mark=' + mark, function (t) {
+@@ -22,7 +17,7 @@ marks.forEach(function (mark) {
+ 
+       var matchCount = 0
+       g.on('match', function (m) {
+-        t.isAbsolute(m)
++        t.ok(path.isAbsolute(m), 'must be absolute', { found: m })
+         matchCount++
+       })
+ 
+@@ -30,7 +25,7 @@ marks.forEach(function (mark) {
+         t.equal(matchCount, bashResults[pattern].length, 'must match all files')
+         t.equal(results.length, bashResults[pattern].length, 'must match all files')
+         results.forEach(function (m) {
+-          t.isAbsolute(m)
++          t.ok(path.isAbsolute(m), 'must be absolute', { found: m })
+         })
+         t.end()
+       })
+@@ -41,7 +36,7 @@ marks.forEach(function (mark) {
+ 
+       t.equal(results.length, bashResults[pattern].length, 'must match all files')
+       results.forEach(function (m) {
+-        t.ok(isAbsolute(m), 'must be absolute', { found: m })
++        t.ok(path.isAbsolute(m), 'must be absolute', { found: m })
+       })
+       t.end()
+     })
+diff --git a/test/bash-comparison.js b/test/bash-comparison.js
+index 296cc51..e521dce 100644
+--- a/test/bash-comparison.js
++++ b/test/bash-comparison.js
+@@ -7,7 +7,6 @@ var bashResults = require("./bash-results.json")
+ var globs = Object.keys(bashResults)
+ var glob = require("../")
+ var path = require("path")
+-var isAbsolute = require("path-is-absolute")
+ 
+ // run from the root of the project
+ // this is usually where you're at anyway, but be sure.
+@@ -20,7 +19,7 @@ function cacheCheck(g, t) {
+   var caches = [ 'cache', 'statCache', 'symlinks' ]
+   caches.forEach(function (c) {
+     Object.keys(g[c]).forEach(function (p) {
+-      t.ok(isAbsolute(p), p + ' should be absolute')
++      t.ok(path.isAbsolute(p), p + ' should be absolute')
+     })
+   })
+ }
+diff --git a/test/cwd-test.js b/test/cwd-test.js
+index a57ddd0..89ebccf 100644
+--- a/test/cwd-test.js
++++ b/test/cwd-test.js
+@@ -4,7 +4,6 @@ var tap = require("tap")
+ var origCwd = process.cwd()
+ process.chdir(__dirname + '/fixtures')
+ var path = require('path')
+-var isAbsolute = require('path-is-absolute')
+ var glob = require('../')
+ 
+ function cacheCheck(g, t) {
+@@ -12,7 +11,7 @@ function cacheCheck(g, t) {
+   var caches = [ 'cache', 'statCache', 'symlinks' ]
+   caches.forEach(function (c) {
+     Object.keys(g[c]).forEach(function (p) {
+-      t.ok(isAbsolute(p), p + ' should be absolute')
++      t.ok(path.isAbsolute(p), p + ' should be absolute')
+     })
+   })
+ }
+diff --git a/test/nodir.js b/test/nodir.js
+index 1f09569..01cc8b0 100644
+--- a/test/nodir.js
++++ b/test/nodir.js
+@@ -2,7 +2,6 @@ require("./global-leakage.js")
+ var test = require("tap").test
+ var glob = require('../')
+ var path = require('path')
+-var isAbsolute = require('path-is-absolute')
+ process.chdir(__dirname + '/fixtures')
+ 
+ function cacheCheck(g, t) {
+@@ -10,7 +9,7 @@ function cacheCheck(g, t) {
+   var caches = [ 'cache', 'statCache', 'symlinks' ]
+   caches.forEach(function (c) {
+     Object.keys(g[c]).forEach(function (p) {
+-      t.ok(isAbsolute(p), p + ' should be absolute')
++      t.ok(path.isAbsolute(p), p + ' should be absolute')
+     })
+   })
+ }
+diff --git a/test/root-nomount.js b/test/root-nomount.js
+index db2f721..0ebada8 100644
+--- a/test/root-nomount.js
++++ b/test/root-nomount.js
+@@ -2,14 +2,13 @@ require("./global-leakage.js")
+ var tap = require("tap")
+ var glob = require('../')
+ var path = require('path')
+-var isAbsolute = require('path-is-absolute')
+ 
+ function cacheCheck(g, t) {
+   // verify that path cache keys are all absolute
+   var caches = [ 'cache', 'statCache', 'symlinks' ]
+   caches.forEach(function (c) {
+     Object.keys(g[c]).forEach(function (p) {
+-      t.ok(isAbsolute(p), p + ' should be absolute')
++      t.ok(path.isAbsolute(p), p + ' should be absolute')
+     })
+   })
+ }
+diff --git a/test/root.js b/test/root.js
+index 14ff15a..25a7989 100644
+--- a/test/root.js
++++ b/test/root.js
+@@ -5,14 +5,13 @@ process.chdir(__dirname + '/fixtures')
+ 
+ var glob = require('../')
+ var path = require('path')
+-var isAbsolute = require('path-is-absolute')
+ 
+ function cacheCheck(g, t) {
+   // verify that path cache keys are all absolute
+   var caches = [ 'cache', 'statCache', 'symlinks' ]
+   caches.forEach(function (c) {
+     Object.keys(g[c]).forEach(function (p) {
+-      t.ok(isAbsolute(p), p + ' should be absolute')
++      t.ok(path.isAbsolute(p), p + ' should be absolute')
+     })
+   })
+ }

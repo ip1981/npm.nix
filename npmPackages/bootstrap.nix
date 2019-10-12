@@ -32,9 +32,11 @@ self: super:
     _dummy_matcha = _mkDummy "matcha" "0.7.0";
     _dummy_mocha = _mkDummy "mocha" "6.2.1";
     _dummy_mock-fs = _mkDummy "mock-fs" "4.10.1";
+    _dummy_rimraf = _mkDummy "rimraf" "3.0.0";
     _dummy_svg-term-cli = _mkDummy "svg-term-cli" "2.1.1";
     _dummy_tap = _mkDummy "tap" "14.6.5";
     _dummy_tape = _mkDummy "tape" "4.11.0";
+    _dummy_tick = _mkDummy "tick" "0.1.1";
     _dummy_tsd = _mkDummy "tsd" "0.9.0";
     _dummy_xo = _mkDummy "xo" "0.25.3";
 
@@ -94,6 +96,18 @@ in rec {
 
   _fs-realpath = dontCheck(callPackage ./fs.realpath {
     tap = _dummy_tap;
+  });
+
+  _glob = dontCheck(callPackage ./glob {
+    fs-realpath = _fs-realpath;
+    inflight = _inflight;
+    inherits = _inherits;
+    minimatch = _minimatch;
+    mkdirp = _mkdirp;
+    once = _once;
+    rimraf = _dummy_rimraf;
+    tap = _dummy_tap;
+    tick = _dummy_tick;
   });
 
   _has-flag = dontCheck (callPackage ./has-flag {
