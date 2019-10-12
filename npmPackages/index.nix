@@ -16,6 +16,7 @@ in {
   escape-string-regexp = callPackage ./escape-string-regexp {};
   fibers = callPackage ./fibers {};
   file-uri-to-path = callPackage ./file-uri-to-path {};
+  fs-realpath = callPackage ./fs.realpath {};
   has-flag = callPackage ./has-flag {};
   inflight = callPackage ./inflight {};
   inherits = callPackage ./inherits {};
