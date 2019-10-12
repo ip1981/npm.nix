@@ -108,6 +108,10 @@ in rec {
     wrappy = _wrappy;
   });
 
+  _inherits = dontCheck (callPackage ./inherits {
+    tap = _dummy_tap;
+  });
+
   _minimatch = dontCheck (callPackage ./minimatch {
     brace-expansion = _brace-expansion;
     tap = _dummy_tap;
