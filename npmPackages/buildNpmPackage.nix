@@ -4,6 +4,7 @@
 , version
 , src
 , npmInputs ? [] # NPM packages used to resolve dependencies
+, dropDevDependencies ? []
 , buildInputs ? [] # Other build inputs
 , nativeBuildInputs ? []
 , patches ? []
@@ -49,6 +50,12 @@ stdenv.mkDerivation {
       send-metrics = false
       update-notifier = false
     NPMRC
+
+    ${lib.optionalString (dropDevDependencies != []) ''
+      node ${scripts}/drop-dev-deps.js ${lib.concatMapStringsSep " " (f: "'${f}'") dropDevDependencies} \
+      < package.json > package.json.devdeps
+      mv package.json.devdeps package.json
+    ''}
 
     node ${scripts}/resolve.js \
       ${lib.optionalString jailbreak "--jailbreak"} \
