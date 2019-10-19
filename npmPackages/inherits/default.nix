@@ -18,6 +18,5 @@ buildNpmPackage {
     tap
   ];
 
-  jailbreak = true;
 }
 

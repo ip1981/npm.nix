@@ -18,7 +18,6 @@ buildNpmPackage {
     balanced-match concat-map matcha tape
   ];
 
-  jailbreak = true;
 
   files = [
     "index.js"

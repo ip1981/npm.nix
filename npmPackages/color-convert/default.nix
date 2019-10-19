@@ -14,6 +14,5 @@ buildNpmPackage rec {
     xo
   ];
 
-  jailbreak = true;
 
 }

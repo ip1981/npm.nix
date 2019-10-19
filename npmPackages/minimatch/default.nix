@@ -18,7 +18,6 @@ buildNpmPackage {
     brace-expansion tap
   ];
 
-  jailbreak = true;
 
 }
 

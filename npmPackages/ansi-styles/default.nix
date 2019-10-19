@@ -18,6 +18,5 @@ buildNpmPackage {
     ava color-convert svg-term-cli xo
   ];
 
-  jailbreak = true;
 }
 

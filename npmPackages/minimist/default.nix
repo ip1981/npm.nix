@@ -10,7 +10,6 @@ buildNpmPackage rec {
   };
 
   npmInputs = [ covert tap tape ];
-  jailbreak = true;
 
   files = [ "index.js" ];
 }

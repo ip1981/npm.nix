@@ -12,6 +12,5 @@ buildNpmPackage rec {
     tap
   ];
 
-  jailbreak = true;
 
 }

@@ -12,7 +12,7 @@
 , buildPhase ? "npm install"
 , checkPhase ? "npm test"
 , doCheck ? true
-, jailbreak ? false # Ignore version constraints of the dependencies
+, jailbreak ? true # Ignore version constraints of the dependencies
 , meta ? {}
 }:
 

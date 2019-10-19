@@ -20,7 +20,6 @@ buildNpmPackage {
     tick
   ];
 
-  jailbreak = true;
 
   patches = [
     ./path-is-absolute.patch

@@ -9,5 +9,4 @@ buildNpmPackage rec {
   };
 
   npmInputs = [ tap ];
-  jailbreak = true;
 }

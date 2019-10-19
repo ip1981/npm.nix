@@ -18,7 +18,6 @@ buildNpmPackage {
     tape
   ];
 
-  jailbreak = true;
 
   files = [
     "index.js"

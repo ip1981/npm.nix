@@ -18,6 +18,5 @@ buildNpmPackage {
     ava callsites execa tsd xo
   ];
 
-  jailbreak = true;
 }
 

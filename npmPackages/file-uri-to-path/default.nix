@@ -23,6 +23,5 @@ buildNpmPackage {
     "index.ts"
   ];
 
-  jailbreak = true;
 }
 

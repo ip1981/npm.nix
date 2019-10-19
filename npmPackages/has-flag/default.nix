@@ -18,6 +18,5 @@ buildNpmPackage {
     ava tsd xo
   ];
 
-  jailbreak = true;
 }
 

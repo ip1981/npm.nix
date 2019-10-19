@@ -15,7 +15,6 @@ buildNpmPackage rec {
     tap
   ];
 
-  jailbreak = true;
 
   files = [
     "bin"

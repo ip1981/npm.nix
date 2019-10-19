@@ -18,6 +18,5 @@ buildNpmPackage {
     tap wrappy
   ];
 
-  jailbreak = true;
 }
 
