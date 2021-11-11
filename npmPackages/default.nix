@@ -1,11 +1,9 @@
 { pkgs ? (import <nixpkgs> {})
-, stdenv ? pkgs.stdenv
+, lib ? pkgs.lib
 , nodejs ? pkgs.nodejs
 }:
 
 let
-
-  inherit (stdenv) lib;
 
   set0 = lib.makeExtensible (self:
     let
