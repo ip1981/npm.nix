@@ -126,6 +126,9 @@ $ cat color-convert/package.json
     "conversions.js",
     "route.js"
   ]
+  "dependencies": {
+    "color-name": "file:/nix/store/2k0qqdcf64mdv80hnnakpxrvkjwi99fr-nodejs-14.17.3-color-name-1.1.4"
+  }
 }
 
 $ ls -lh color-convert/node_modules/

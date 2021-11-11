@@ -28,7 +28,6 @@ for (var i = 0; i < args.length; i++) {
 pipeThrough((pkg, done) => {
     switch (phase) {
         case 'postInstall':
-            delete pkg.dependencies;
             // fall throw
 
         case 'preInstall':
