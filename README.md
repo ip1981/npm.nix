@@ -133,7 +133,7 @@ $ cat color-convert/package.json
 
 $ ls -lh color-convert/node_modules/
 total 4,0K
-lrwxrwxrwx 1 pashev pashev 70 ene  1  1970 color-name -> ../../jbdpbcsfam331mqgylbhixsdydcsg7wd-nodejs-10.16.3-color-name-1.1.4
+lrwxrwxrwx 1 pashev pashev 70 ene  1  1970 color-name -> ../../2k0qqdcf64mdv80hnnakpxrvkjwi99fr-nodejs-14.17.3-color-name-1.1.4
 
 $ node
 > var convert = require('./color-convert');
