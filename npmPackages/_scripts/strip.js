@@ -28,7 +28,7 @@ for (var i = 0; i < args.length; i++) {
 pipeThrough((pkg, done) => {
     switch (phase) {
         case 'postInstall':
-            // fall throw
+            // fall through
 
         case 'preInstall':
             delete pkg.engines;
@@ -36,7 +36,7 @@ pipeThrough((pkg, done) => {
             delete pkg.scripts;
             delete pkg.tap;
             delete pkg.xo;
-            // fall throw
+            // fall through
 
         case 'postConfigure':
             delete pkg.devDependencies;
